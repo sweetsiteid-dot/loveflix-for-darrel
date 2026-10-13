@@ -1,498 +1,629 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#10090b">
-    <title>LOVEFLIX | Teicy × Darrel</title>
+
+    <title>LOVEFLIX | 1st Mensiversary</title>
+
     <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 </head>
+
 <body>
 
-    <!-- LOADING SCREEN -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-logo">LOVE<span>FLIX</span></div>
-            <div class="loading-spinner"></div>
-            <p>Loading your love story...</p>
-            <div class="loading-line"><span></span></div>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+    <source src="yourestilltheone.mp3" type="audio/mpeg">
+</audio>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+    <div class="netflix-logo">LOVEFLIX</div>
+    <p>Loading Our Story...</p>
+</div>
+
+<!-- PIN SCREEN -->
+<div id="pinScreen" class="hidden">
+    <div class="pin-box">
+        <h2>Our Story 🔐</h2>
+        <p>Enter Access Code</p>
+
+        <input
+            type="password"
+            id="pinInput"
+            maxlength="4"
+            placeholder="••••"
+            inputmode="numeric"
+        >
+
+        <button onclick="checkPin()">Continue 🤍</button>
+        <span id="pinError"></span>
+    </div>
+</div>
+
+<!-- PROFILE SELECTION -->
+<div id="profileScreen" class="hidden">
+    <h1>Who's Watching?</h1>
+
+    <div class="profiles">
+        <div class="profile-card" onclick="enterLoveflix()">
+            <img src="foto1.jpg" alt="Darrel">
+            <p>Darrel 🤍</p>
         </div>
     </div>
+</div>
 
-    <!-- PIN SCREEN -->
-    <section id="pinScreen" class="screen pin-screen hidden">
-        <div class="ambient ambient-one"></div>
-        <div class="ambient ambient-two"></div>
+<!-- MAIN APP -->
+<div id="mainApp" class="hidden">
 
-        <div class="pin-card">
-            <div class="mini-logo">LOVE<span>FLIX</span></div>
-            <div class="lock-icon">♥</div>
-            <p class="eyebrow">A PRIVATE LOVE STORY</p>
-            <h1>Only for <span>Darrel.</span></h1>
-            <p class="muted">Some stories are meant for one person only.</p>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">LOVEFLIX</div>
 
-            <form id="pinForm">
-                <label for="pinInput">Enter your secret PIN</label>
-                <input id="pinInput" type="password" inputmode="numeric"
-                       maxlength="4" placeholder="••••" autocomplete="off">
-                <button id="unlockBtn" class="primary-btn" type="submit">
-                    Unlock Our Story <span>↗</span>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#continue">Memories</a></li>
+            <li><a href="#letter">Our Letter</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section
+        id="hero"
+        class="hero"
+        style="background-image:url('foto1.jpg');"
+    >
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+            <span class="badge">1ST MENSIVERSARY</span>
+
+            <h1>
+                HAPPY 1ST
+                MENSIVERSARY,
+                DARREL 🤍
+            </h1>
+
+            <h3>Our Story • Episode 01</h3>
+
+            <p>
+                One month, countless little moments,
+                and one person I'm really glad it's you.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="play-btn" onclick="playStory()">
+                    ▶ Play Our Story
                 </button>
-                <p id="pinError" class="error-message"></p>
-            </form>
 
-            <p class="tiny-note">Made with love, just for you ♡</p>
+                <button
+                    class="info-btn"
+                    onclick="scrollToSection('continue')"
+                >
+                    More Memories
+                </button>
+            </div>
+        </div>
+
+        <!-- HIDDEN HEART #1 -->
+        <div class="hidden-heart" onclick="collectHeart(this)">
+            🤍
         </div>
     </section>
 
-    <!-- PROFILE SCREEN -->
-    <section id="profileScreen" class="screen profile-screen hidden">
-        <div class="profile-background"></div>
-        <div class="profile-content">
-            <div class="mini-logo">LOVE<span>FLIX</span></div>
-            <p class="eyebrow">WHO'S WATCHING?</p>
-            <h1>Choose your profile</h1>
+    <!-- CONTINUE WATCHING -->
+    <section id="continue" class="section">
+        <h2>Continue Watching 🤍</h2>
 
-            <button class="profile-choice" onclick="enterLoveflix()">
-                <div class="profile-avatar">
-                    <img src="foto1.jpg" alt="Darrel">
-                    <span class="avatar-heart">♥</span>
-                </div>
-                <span class="profile-name">Darrel</span>
-                <span class="profile-subtitle">My favorite person</span>
-            </button>
+        <div class="movie-row">
 
-            <p class="muted profile-footer">One profile. One story. One special person.</p>
-        </div>
-    </section>
-
-    <!-- MAIN WEBSITE -->
-    <main id="mainApp" class="hidden">
-
-        <!-- NAVBAR -->
-        <nav class="navbar">
-            <a href="#hero" class="nav-logo">LOVE<span>FLIX</span></a>
-            <div class="nav-links">
-                <a href="#hero">Home</a>
-                <a href="#letter">Our Letter</a>
-                <a href="#memories">Memories</a>
-                <a href="#achievements">Achievements</a>
-            </div>
-            <button id="musicBtn" class="music-btn" aria-label="Putar atau jeda musik">
-                <span id="musicIcon">♫</span>
-                <span id="musicLabel">Music On</span>
-            </button>
-        </nav>
-
-        <!-- HERO -->
-        <section id="hero" class="hero">
-            <div class="hero-backdrop"></div>
-            <div class="hero-grain"></div>
-
-            <button class="hidden-heart hero-heart" data-heart="hero"
-                    onclick="collectHeart(this)" aria-label="Hati tersembunyi">♥</button>
-
-            <div class="hero-content">
-                <p class="hero-kicker"><span class="red-dot"></span> LOVEFLIX ORIGINAL</p>
-                <p class="season-label">A STORY ABOUT US · SEASON 01</p>
-                <h1 class="hero-title">I'm Glad<br><span>It's You.</span></h1>
-                <div class="hero-meta">
-                    <span class="match-score">♡ 100% MATCH</span>
-                    <span>2026</span>
-                    <span class="age-rating">LOVE</span>
-                    <span>Romance · Our Story</span>
-                </div>
-                <p class="hero-description">
-                    In a world full of people, somehow my heart found its favorite person.
-                    This is our little story, and I'm glad it's you.
-                </p>
-
-                <div class="hero-buttons">
-                    <button class="primary-btn" onclick="playStory()">
-                        <span>▶</span> Play Our Story
-                    </button>
-                    <button class="secondary-btn" onclick="scrollToSection('letter')">
-                        <span>♡</span> Read Our Letter
-                    </button>
-                </div>
-
-                <div class="hero-bottom-note">
-                    <span class="live-indicator"></span>
-                    <span>NOW STREAMING: TEICY & DARREL</span>
-                </div>
-            </div>
-
-            <div class="hero-side-label">A LITTLE LOVE, A LOT OF MEMORIES</div>
-            <div class="hero-bottom-gradient"></div>
-        </section>
-
-        <!-- CONTINUE WATCHING -->
-        <section id="continue" class="content-section continue-section">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">PICK UP WHERE WE LEFT OFF</p>
-                    <h2>Continue <span>Our Story</span></h2>
-                </div>
-                <span class="section-index">01 / 04</span>
-            </div>
-
-            <div class="continue-card">
-                <div class="continue-image">
-                    <img src="foto2.jpg" alt="Our memory">
-                    <span class="image-overlay-label">OUR LITTLE UNIVERSE</span>
-                    <div class="play-circle">▶</div>
-                </div>
-                <div class="continue-info">
-                    <span class="episode-badge">EPISODE 01</span>
+            <div class="movie-card">
+                <img src="foto2.jpg" alt="Memory 01">
+                <div class="movie-info">
                     <h3>I'm Glad It's You</h3>
-                    <p>Every little moment with you deserves to be remembered.</p>
-                    <div class="episode-progress"><span></span></div>
-                    <button class="text-btn" onclick="scrollToSection('letter')">
-                        Continue reading <span>→</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- LETTER -->
-        <section id="letter" class="content-section letter-section">
-            <button class="hidden-heart letter-heart" data-heart="letter"
-                    onclick="collectHeart(this)" aria-label="Hati tersembunyi">♥</button>
-
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">A MESSAGE FROM MY HEART</p>
-                    <h2>Dear <span>Darrel.</span></h2>
-                </div>
-                <span class="section-index">02 / 04</span>
-            </div>
-
-            <article class="letter-card" id="loveLetter">
-                <div class="letter-top">
-                    <div class="letter-stamp">T <span>♥</span> D</div>
-                    <div class="letter-meta">
-                        <span>LOVE LETTER NO. 001</span>
-                        <span>FROM TEICY, WITH LOVE</span>
-                    </div>
-                </div>
-
-                <p class="letter-date">To my favorite person, Darrel ♡</p>
-                <h3>Episode 01: I'm Glad It's You</h3>
-
-                <div class="letter-body">
-                    <p>sayang, gua seneng banget bisa sampai di titik ini sama lu, el. thank you for being part of my life, for making me smile in your own little ways, and for choosing me.</p>
-
-                    <p>gua emang nggak jago ngerangkai kata romantis, gengsi gua aja udah setinggi burj khalifa WKWKWK, tapi rasa sayang gua ke lu melebihi itu. makanya gua lebih sering nunjukin rasa sayang gua lewat hal-hal kecil, kayak chibi yang gua bikin buat lu, manips yg gua bikin, channel yg gua bikin.</p>
-
-                    <p>gua harap kita bisa terus belajar buat ngerti satu sama lain, tumbuh bareng, dan sama-sama memperbaiki apa pun yang perlu diperbaiki. <em>i don't need us to be perfect, i just want us to keep trying and choosing each other.</em></p>
-
-                    <p>gua sayang banget sama lu, el, walaupun lu kadang ngeselin dan bikin gua pengen nonjok BUT STILL, i'm really glad it's you.</p>
-
-                    <p>semoga cerita kita masih panjang ya el. <em>i love you, my favorite headache.</em> 👻🤍</p>
-                </div>
-
-                <div class="letter-signature">
-                    <span>always yours,</span>
-                    <strong>Teicy ♡</strong>
-                </div>
-
-                <div class="letter-bottom">
-                    <span>THIS LETTER IS JUST FOR YOU</span>
-                    <span>♥ ♥ ♥</span>
-                </div>
-            </article>
-
-            <p class="section-footnote">Psst... there's a little heart hidden somewhere. Keep looking ♡</p>
-        </section>
-
-        <!-- MEMORY GALLERY -->
-        <section id="memories" class="content-section memories-section">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">LITTLE THINGS, BIG FEELINGS</p>
-                    <h2>Our <span>Memories.</span></h2>
-                    <p class="section-description">A collection of moments that make our story feel like home.</p>
-                </div>
-                <span class="section-index">03 / 04</span>
-            </div>
-
-            <div class="memory-feature">
-                <div class="feature-photo">
-                    <img src="foto3.jpg" alt="Featured memory">
-                    <div class="feature-caption">
-                        <span>FEATURED MEMORY</span>
-                        <h3>My favorite kind of forever.</h3>
-                    </div>
-                </div>
-                <div class="feature-copy">
-                    <span class="red-line"></span>
-                    <p class="eyebrow">TOGETHER IS MY FAVORITE PLACE</p>
-                    <h3>It's the little things that mean the most.</h3>
-                    <p>Not every memory has to be perfect. As long as it's a part of our story, it will always mean something to me.</p>
-                    <span class="handwritten">you + me = ♡</span>
+                    <p>Episode 01</p>
                 </div>
             </div>
 
-            <div class="gallery-heading">
-                <div>
-                    <h3>Our photo collection</h3>
-                    <p>Sixteen little pieces of our universe.</p>
-                </div>
-                <span class="gallery-count">16 MEMORIES</span>
-            </div>
-
-            <div class="photo-gallery">
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto1.jpg">
-                    <img src="foto1.jpg" alt="Memory 01" loading="lazy"><span>01</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto2.jpg">
-                    <img src="foto2.jpg" alt="Memory 02" loading="lazy"><span>02</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto3.jpg">
-                    <img src="foto3.jpg" alt="Memory 03" loading="lazy"><span>03</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto4.jpg">
-                    <img src="foto4.jpg" alt="Memory 04" loading="lazy"><span>04</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto5.jpg">
-                    <img src="foto5.jpg" alt="Memory 05" loading="lazy"><span>05</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto6.jpg">
-                    <img src="foto6.jpg" alt="Memory 06" loading="lazy"><span>06</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto7.jpg">
-                    <img src="foto7.jpg" alt="Memory 07" loading="lazy"><span>07</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto8.jpg">
-                    <img src="foto8.jpg" alt="Memory 08" loading="lazy"><span>08</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto9.jpg">
-                    <img src="foto9.jpg" alt="Memory 09" loading="lazy"><span>09</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto10.jpg">
-                    <img src="foto10.jpg" alt="Memory 10" loading="lazy"><span>10</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto11.jpg">
-                    <img src="foto11.jpg" alt="Memory 11" loading="lazy"><span>11</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto12.jpg">
-                    <img src="foto12.jpg" alt="Memory 12" loading="lazy"><span>12</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto13.jpg">
-                    <img src="foto13.jpg" alt="Memory 13" loading="lazy"><span>13</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto14.jpg">
-                    <img src="foto14.jpg" alt="Memory 14" loading="lazy"><span>14</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto15.jpg">
-                    <img src="foto15.jpg" alt="Memory 15" loading="lazy"><span>15</span>
-                </button>
-                <button class="gallery-photo" onclick="openPhoto(this)" data-full="foto16.jpg">
-                    <img src="foto16.jpg" alt="Memory 16" loading="lazy"><span>16</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- MEMORY GAME -->
-        <section id="memoryGame" class="content-section game-section">
-            <button class="hidden-heart game-heart" data-heart="game"
-                    onclick="collectHeart(this)" aria-label="Hati tersembunyi">♥</button>
-
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">A LITTLE GAME FOR YOU</p>
-                    <h2>Match Our <span>Memories.</span></h2>
-                    <p class="section-description">Find all three matching pairs to unlock an achievement.</p>
-                </div>
-                <span class="game-counter"><span id="movesCount">0</span> MOVES</span>
-            </div>
-
-            <div class="memory-game" id="memoryGameBoard">
-                <button class="memory-card" data-card="heart" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">♡</span>
-                </button>
-                <button class="memory-card" data-card="star" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">✦</span>
-                </button>
-                <button class="memory-card" data-card="moon" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">☾</span>
-                </button>
-                <button class="memory-card" data-card="heart" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">♡</span>
-                </button>
-                <button class="memory-card" data-card="moon" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">☾</span>
-                </button>
-                <button class="memory-card" data-card="star" aria-label="Memory card">
-                    <span class="card-back">♥</span><span class="card-front">✦</span>
-                </button>
-            </div>
-
-            <div class="game-status">
-                <p id="gameMessage">Take your time, sayang. You can do it! ♡</p>
-                <button id="resetGameBtn" class="text-btn" onclick="resetMemoryGame()">↻ Play again</button>
-            </div>
-        </section>
-
-        <!-- QUIZ -->
-        <section id="quiz" class="content-section quiz-section">
-            <div class="quiz-card">
-                <div class="quiz-decoration">?</div>
-                <p class="eyebrow">A TINY TEST OF LOVE</p>
-                <h2>One question, <span>Darrel.</span></h2>
-                <p class="quiz-question">Who is the person who made this little website just for you?</p>
-
-                <div class="quiz-options">
-                    <button class="quiz-option" onclick="wrongAnswer(this)">A. Your favorite headache</button>
-                    <button class="quiz-option" onclick="correctAnswer(this)">B. Teicy, of course ♡</button>
-                    <button class="quiz-option" onclick="wrongAnswer(this)">C. Netflix customer service</button>
-                </div>
-                <p id="quizFeedback" class="quiz-feedback"></p>
-            </div>
-        </section>
-
-        <!-- ACHIEVEMENTS -->
-        <section id="achievements" class="content-section achievements-section">
-            <button class="hidden-heart season-heart" data-heart="season"
-                    onclick="collectHeart(this)" aria-label="Hati tersembunyi">♥</button>
-
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">YOUR LITTLE LOVE MISSIONS</p>
-                    <h2>Love <span>Achievements.</span></h2>
-                    <p class="section-description">Every little thing you discover brings you closer to the secret episode.</p>
-                </div>
-                <span class="section-index">04 / 04</span>
-            </div>
-
-            <div class="achievement-progress-card">
-                <div class="progress-top">
-                    <div>
-                        <p class="eyebrow">YOUR LOVE JOURNEY</p>
-                        <h3><span id="completedCount">0</span> of 6 achievements</h3>
-                    </div>
-                    <span id="progressPercent">0%</span>
-                </div>
-                <div class="progress-track"><span id="progressBar"></span></div>
-                <p id="progressMessage">Your story is just getting started. ♡</p>
-            </div>
-
-            <div class="achievement-grid">
-                <article class="achievement-card" id="ach1">
-                    <div class="achievement-icon">🔓</div>
-                    <div><span class="achievement-number">MISSION 01</span><h3>Welcome Home</h3><p>Unlock the website with your secret PIN.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-                <article class="achievement-card" id="ach2">
-                    <div class="achievement-icon">💌</div>
-                    <div><span class="achievement-number">MISSION 02</span><h3>Words From Teicy</h3><p>Read the whole letter made just for you.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-                <article class="achievement-card" id="ach3">
-                    <div class="achievement-icon">💘</div>
-                    <div><span class="achievement-number">MISSION 03</span><h3>Love Expert</h3><p>Answer the little love quiz correctly.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-                <article class="achievement-card" id="ach4">
-                    <div class="achievement-icon">🧩</div>
-                    <div><span class="achievement-number">MISSION 04</span><h3>Memory Keeper</h3><p>Match all the pairs in the memory game.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-                <article class="achievement-card" id="ach5">
-                    <div class="achievement-icon">💗</div>
-                    <div><span class="achievement-number">MISSION 05</span><h3>Heart Collector</h3><p>Find all five hidden hearts around the website.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-                <article class="achievement-card" id="ach6">
-                    <div class="achievement-icon">🔐</div>
-                    <div><span class="achievement-number">MISSION 06</span><h3>Secret Episode</h3><p>Unlock the special message hidden for you.</p></div>
-                    <span class="achievement-status">LOCKED</span>
-                </article>
-            </div>
-
-            <div class="secret-episode-card">
-                <div class="secret-episode-art">
-                    <span class="secret-lock" id="secretLockIcon">🔒</span>
-                    <span class="secret-art-label">LOVEFLIX SPECIAL</span>
-                </div>
-                <div class="secret-episode-info">
-                    <p class="eyebrow">A LITTLE SURPRISE</p>
-                    <h3>Episode 02: Just Between Us</h3>
-                    <p>There's something waiting for you behind this locked episode.</p>
-                    <button id="openSecretBtn" class="primary-btn" onclick="openSecretEpisode()" disabled>
-                        Collect all 5 hearts first
-                    </button>
+            <div class="movie-card">
+                <img src="foto3.jpg" alt="Memory 02">
+                <div class="movie-info">
+                    <h3>My Favorite Human</h3>
+                    <p>Episode 02</p>
                 </div>
             </div>
 
-            <div id="secretContent" class="secret-content hidden">
-                <div class="secret-inner">
-                    <span class="secret-heart-big">♥</span>
-                    <p class="eyebrow">YOU FOUND THE SECRET EPISODE</p>
-                    <h2>One more thing, <span>Darrel.</span></h2>
-                    <p>kalau suatu hari nanti lu ngerasa semuanya lagi berat, please remember that you don't have to figure everything out alone. gua mungkin nggak selalu punya jawaban yang tepat, tapi gua mau terus belajar buat ada di samping lu.</p>
-                    <p>thank you for being you. thank you for staying, for trying, and for being part of my days. wherever our story goes, i'm grateful that this chapter has you in it.</p>
-                    <p class="secret-signature">with all my heart, always — Teicy ♡</p>
-                    <button class="secondary-btn" onclick="closeSeasonUnlocked()">Keep this in your heart ♥</button>
+            <div class="movie-card">
+                <img src="foto4.jpg" alt="Memory 03">
+                <div class="movie-info">
+                    <h3>Little Things, Big Feelings</h3>
+                    <p>Episode 03</p>
                 </div>
             </div>
-        </section>
 
-        <!-- FINAL NOTE -->
-        <section id="credits" class="credits-section">
-            <button class="hidden-heart credits-heart" data-heart="credits"
-                    onclick="collectHeart(this)" aria-label="Hati tersembunyi">♥</button>
-
-            <div class="credits-content">
-                <div class="credits-logo">LOVE<span>FLIX</span></div>
-                <p class="eyebrow">END OF EPISODE 01</p>
-                <h2>I'm glad <span>it's you.</span></h2>
-                <p>Some stories are watched. Ours is lived, one little moment at a time.</p>
-                <div class="credits-divider"><span>♥</span></div>
-                <p class="credits-from">A little universe made by Teicy</p>
-                <p class="credits-to">for her favorite person, Darrel.</p>
-                <button class="text-btn" onclick="scrollToSection('hero')">↟ Back to the beginning</button>
+            <div class="movie-card">
+                <img src="foto5.jpg" alt="Memory 04">
+                <div class="movie-info">
+                    <h3>Us, In Our Own Way</h3>
+                    <p>Episode 04</p>
+                </div>
             </div>
-        </section>
 
-        <!-- ACHIEVEMENT POPUP -->
-        <div id="achievementPopup" class="achievement-popup" aria-live="polite">
-            <div class="popup-icon" id="popupIcon">🏆</div>
-            <div>
-                <p class="eyebrow">ACHIEVEMENT UNLOCKED</p>
-                <h3 id="popupTitle">Mission Complete!</h3>
-                <p id="popupDescription">You did it, sayang.</p>
+        </div>
+    </section>
+
+    <!-- PHOTO GALLERY: 16 PHOTOS -->
+    <section class="section">
+        <h2>Top Picks For My Favorite Person 👻🤍</h2>
+
+        <div class="grid-gallery">
+
+            <div class="poster">
+                <img src="foto1.jpg" alt="Memory 01">
             </div>
-            <button onclick="hideAchievementPopup()" aria-label="Tutup">×</button>
+
+            <div class="poster">
+                <img src="foto2.jpg" alt="Memory 02">
+            </div>
+
+            <div class="poster">
+                <img src="foto3.jpg" alt="Memory 03">
+            </div>
+
+            <div class="poster">
+                <img src="foto4.jpg" alt="Memory 04">
+            </div>
+
+            <div class="poster">
+                <img src="foto5.jpg" alt="Memory 05">
+            </div>
+
+            <div class="poster">
+                <img src="foto6.jpg" alt="Memory 06">
+            </div>
+
+            <div class="poster">
+                <img src="foto7.jpg" alt="Memory 07">
+            </div>
+
+            <div class="poster">
+                <img src="foto8.jpg" alt="Memory 08">
+            </div>
+
+            <div class="poster">
+                <img src="foto9.jpg" alt="Memory 09">
+            </div>
+
+            <div class="poster">
+                <img src="foto10.jpg" alt="Memory 10">
+            </div>
+
+            <div class="poster">
+                <img src="foto11.jpg" alt="Memory 11">
+            </div>
+
+            <div class="poster">
+                <img src="foto12.jpg" alt="Memory 12">
+            </div>
+
+            <div class="poster">
+                <img src="foto13.jpg" alt="Memory 13">
+            </div>
+
+            <div class="poster">
+                <img src="foto14.jpg" alt="Memory 14">
+            </div>
+
+            <div class="poster">
+                <img src="foto15.jpg" alt="Memory 15">
+            </div>
+
+            <div class="poster">
+                <img src="foto16.jpg" alt="Memory 16">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section id="letter" class="section">
+        <h2>Exclusive Mensiversary Episode 💌</h2>
+
+        <div class="letter-box">
+            <h3>Episode 01: I'm Glad It's You 🤍</h3>
+
+            <p>
+                sayang, gua seneng banget bisa sampai di titik ini sama lu, el.
+                thank you for being part of my life, for making me smile in
+                your own little ways, and for choosing me.
+
+                <br><br>
+
+                gua emang nggak jago ngerangkai kata romantis, gengsi gua aja
+                udah setinggi burj khalifa WKWKWK, tapi rasa sayang gua ke lu
+                melebihi itu. makanya gua lebih sering nunjukin rasa sayang
+                gua lewat hal-hal kecil, kayak chibi yang gua bikin buat lu,
+                manips yg gua bikin, channel yg gua bikin.
+
+                <br><br>
+
+                gua harap kita bisa terus belajar buat ngerti satu sama lain,
+                tumbuh bareng, dan sama-sama memperbaiki apa pun yang perlu
+                diperbaiki. i don't need us to be perfect, i just want us to
+                keep trying and choosing each other.
+
+                <br><br>
+
+                gua sayang banget sama lu, el, walaupun lu kadang ngeselin
+                dan bikin gua pengen nonjok BUT STILL, i'm really glad it's
+                you.
+
+                <br><br>
+
+                semoga cerita kita masih panjang ya el.
+
+                <br><br>
+
+                i love you, my favorite headache. 👻🤍
+            </p>
         </div>
 
-        <!-- PHOTO LIGHTBOX -->
-        <div id="photoLightbox" class="photo-lightbox hidden" onclick="closePhoto(event)">
-            <button class="lightbox-close" onclick="closePhoto(event, true)" aria-label="Tutup foto">×</button>
-            <img id="lightboxImage" src="" alt="Our memory enlarged">
-            <p>one of my favorite little memories ♡</p>
+        <!-- HIDDEN HEART #2 -->
+        <div
+            class="hidden-heart letter-heart"
+            onclick="collectHeart(this)"
+        >
+            🤍
         </div>
+    </section>
 
-        <!-- ALL ACHIEVEMENTS COMPLETE -->
-        <div id="seasonUnlocked" class="season-unlocked hidden">
-            <div class="season-unlocked-card">
-                <div class="season-sparkle">✦</div>
-                <span class="eyebrow">ALL MISSIONS COMPLETED</span>
-                <h2>You did it, <span>Darrel!</span></h2>
-                <p>You found every little piece of this website. Thank you for taking the time to explore our story.</p>
-                <div class="season-reward">♥ <span>OUR STORY CONTINUES</span> ♥</div>
-                <button class="primary-btn" onclick="closeSeasonUnlocked()">Back to our story</button>
+    <!-- ACHIEVEMENT SYSTEM -->
+    <section class="section">
+        <h2>Our Little Achievements 🏆</h2>
+
+        <div class="achievement-box">
+
+            <div class="achievement" id="ach1">
+                ⬜ First Login
             </div>
+
+            <div class="achievement" id="ach2">
+                ⬜ Read Our Letter
+            </div>
+
+            <div class="achievement" id="ach3">
+                ⬜ Couple Quiz Master
+            </div>
+
+            <div class="achievement" id="ach4">
+                ⬜ Memory Hunter
+            </div>
+
+            <div class="achievement" id="ach5">
+                ⬜ Hidden Heart Finder
+            </div>
+
+            <div class="achievement" id="ach6">
+                ⬜ Secret Episode
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MEMORY MATCH GAME -->
+    <section id="memoryGame" class="section">
+        <h2>Our Memory Match 💞</h2>
+
+        <p class="game-desc">
+            Match all the memories to unlock something special.
+        </p>
+
+        <div class="memory-grid">
+
+            <div class="memory-card" data-card="1">
+                <div class="front">?</div>
+                <div class="back">🤍</div>
+            </div>
+
+            <div class="memory-card" data-card="1">
+                <div class="front">?</div>
+                <div class="back">🤍</div>
+            </div>
+
+            <div class="memory-card" data-card="2">
+                <div class="front">?</div>
+                <div class="back">👻</div>
+            </div>
+
+            <div class="memory-card" data-card="2">
+                <div class="front">?</div>
+                <div class="back">👻</div>
+            </div>
+
+            <div class="memory-card" data-card="3">
+                <div class="front">?</div>
+                <div class="back">🫰</div>
+            </div>
+
+            <div class="memory-card" data-card="3">
+                <div class="front">?</div>
+                <div class="back">🫰</div>
+            </div>
+
         </div>
 
-        <!-- HEART COLLECTION TOAST -->
-        <div id="heartToast" class="heart-toast">♡ You found a hidden heart!</div>
+        <div id="memoryResult"></div>
 
-        <audio id="bgMusic" src="yourestilltheone.mp3" loop preload="auto"></audio>
-    </main>
+        <!-- HIDDEN HEART #3 -->
+        <div
+            class="hidden-heart game-heart"
+            onclick="collectHeart(this)"
+        >
+            🤍
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- SECRET EPISODE -->
+    <section class="section" id="secretEpisode">
+        <h2>Secret Episode 🔐</h2>
+
+        <div class="secret-lock">
+            <p>
+                Collect all hidden hearts to unlock this little secret.
+            </p>
+
+            <button id="unlockBtn" disabled>
+                Locked 🔒
+            </button>
+        </div>
+
+        <div id="secretContent" class="hidden">
+
+            <img
+                src="foto16.jpg"
+                class="secret-photo"
+                alt="Our Secret Memory"
+            >
+
+            <h3>A Little Secret About You 👻🤍</h3>
+
+            <p>
+                sebenernya gua nggak selalu jago buat nunjukin apa yang gua
+                rasain lewat kata-kata. kadang gua lebih milih bikin sesuatu
+                buat lu, karena lewat hal-hal kecil itu gua bisa nunjukin
+                kalau lu berarti buat gua.
+
+                <br><br>
+
+                gua suka bikin sesuatu yang bisa lu simpen, lu liat lagi,
+                dan semoga bisa bikin lu senyum setiap kali lu nemuin itu.
+
+                <br><br>
+
+                mungkin gua bakal tetep gengsi buat ngomong romantis,
+                mungkin gua juga bakal tetep ngeselin. WKWKWK.
+
+                <br><br>
+
+                but behind all of that, there's someone who's genuinely
+                happy to have you around.
+
+                <br><br>
+
+                and that someone is me.
+
+                <br><br>
+
+                i'm really glad it's you, el. always remember that. 👻🤍
+            </p>
+
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section id="quiz" class="section">
+        <h2>Darrel Quiz 🤍</h2>
+
+        <div class="quiz-box">
+            <h3>Siapa yang paling gua sayang?</h3>
+
+            <button onclick="correctAnswer()">
+                Darrel 🤍
+            </button>
+
+            <button onclick="wrongAnswer()">
+                Burj Khalifa 🏙️
+            </button>
+
+            <button onclick="wrongAnswer()">
+                Gengsi gua 😭
+            </button>
+
+            <div id="quizResult"></div>
+        </div>
+    </section>
+
+    <!-- SEASON COMPLETION -->
+    <section id="seasonComplete" class="section">
+        <h2>Our Story Progress</h2>
+
+        <div class="season-box">
+
+            <div class="progress-bar">
+                <div
+                    id="seasonProgress"
+                    class="progress-fill"
+                ></div>
+            </div>
+
+            <p id="progressText">
+                0 / 6 Achievements Completed
+            </p>
+
+            <div id="seasonBadge">
+                🤍 Our Story Loading...
+            </div>
+
+        </div>
+
+        <!-- HIDDEN HEART #4 -->
+        <div
+            class="hidden-heart season-heart"
+            onclick="collectHeart(this)"
+        >
+            🤍
+        </div>
+    </section>
+
+    <!-- ENDING CREDITS -->
+    <section id="credits" class="credits-section">
+
+        <div class="credits-wrapper">
+
+            <h1>LOVEFLIX</h1>
+
+            <p>A 1st Mensiversary Special</p>
+
+            <br>
+
+            <p>From</p>
+            <h2>Teicy 🤍</h2>
+
+            <br>
+
+            <p>Starring</p>
+            <h2>Darrel 🤍</h2>
+
+            <br>
+
+            <p>Episode</p>
+            <h2>01</h2>
+
+            <br>
+
+            <p>Access Code</p>
+            <h2>0506</h2>
+
+            <br>
+
+            <p>Genre</p>
+            <h2>Romance • Comedy • A Little Bit of Gengsi</h2>
+
+            <br><br>
+
+            <h1>Thank You For Watching</h1>
+            <h2>I'm Glad It's You 🤍</h2>
+
+        </div>
+
+        <!-- HIDDEN HEART #5 -->
+        <div
+            class="hidden-heart credits-heart"
+            onclick="collectHeart(this)"
+        >
+            🤍
+        </div>
+
+    </section>
+
+    <!-- FINAL SCREEN -->
+    <section class="final-screen">
+
+        <div class="final-card">
+
+            <h1>🎬 Ready For Another Episode?</h1>
+
+            <p>
+                This story isn't over yet.
+                There are still so many memories,
+                random conversations, silly moments,
+                and little things waiting for us.
+
+                <br><br>
+
+                So, el... wanna keep writing
+                this story with me?
+            </p>
+
+            <button
+                onclick="renewSeason()"
+                class="renew-btn"
+            >
+                YES 🤍
+            </button>
+
+            <div id="renewMessage"></div>
+
+        </div>
+
+    </section>
+
+</div>
+<!-- END MAIN APP -->
+
+<!-- CONFETTI -->
+<div id="confettiContainer"></div>
+
+<!-- FLOATING HEARTS -->
+<div class="floating-hearts">
+    <span>🤍</span>
+    <span>👻</span>
+    <span>🤍</span>
+    <span>🫰</span>
+    <span>✨</span>
+</div>
+
+<!-- POPUP ACHIEVEMENT -->
+<div id="achievementPopup" class="achievement-popup">
+    🏆 Achievement Unlocked!
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div id="seasonUnlocked" class="season-unlocked hidden">
+
+    <div class="unlock-box">
+
+        <h1>🤍 OUR STORY COMPLETED</h1>
+
+        <p>
+            You found all the little pieces hidden inside this story.
+
+            <br><br>
+
+            But don't worry...
+
+            <br><br>
+
+            This is only Episode 01.
+            There's still so much more waiting for us.
+        </p>
+
+        <h3>Happy 1st Mensiversary, Darrel 🤍</h3>
+
+        <button onclick="closeSeasonUnlocked()">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>Made with 🤍 by Teicy</p>
+</footer>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
 </body>
 </html>
