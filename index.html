@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOVEFLIX | 2nd Mensiversary</title>
+​<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+​<style>
+/* =========================
+RESET
+========================= */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+​body{
+background:#0b0b0b;
+color:#fff;
+overflow-x:hidden;
+}
+​img{
+width:100%;
+display:block;
+}
+​a{
+text-decoration:none;
+color:white;
+}
+​.hidden{
+display:none !important;
+}
+​/* =========================
+LOADING SCREEN
+========================= */
+#loadingScreen{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+​.netflix-logo{
+font-size:4rem;
+font-weight:800;
+color:#e50914;
+letter-spacing:4px;
+animation:pulseLogo 2s infinite;
+}
+​#loadingScreen p{
+margin-top:15px;
+color:#ccc;
+font-size:1rem;
+}
+​@keyframes pulseLogo{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+​/* =========================
+PIN SCREEN
+========================= */
+#pinScreen{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(
+rgba(0,0,0,.8),
+rgba(0,0,0,.9)
+),
+url("foto1.jpg");
+background-size:cover;
+background-position:center;
+}
+​.pin-box{
+width:90%;
+max-width:400px;
+padding:35px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
+text-align:center;
+}
+​.pin-box h2{
+margin-bottom:10px;
+}
+​.pin-box p{
+color:#bbb;
+margin-bottom:20px;
+}
+​.pin-box input{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:12px;
+text-align:center;
+font-size:1.1rem;
+margin-bottom:15px;
+color: #000;
+}
+​.pin-box button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#e50914;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+​#pinError{
+display:block;
+margin-top:12px;
+color:#ff4b4b;
+}
+​/* =========================
+PROFILE SCREEN
+========================= */
+#profileScreen{
+min-height:100vh;
+background:#141414;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+​#profileScreen h1{
+margin-bottom:40px;
+font-size:2rem;
+}
+​.profiles{
+display:flex;
+gap:25px;
+}
+​.profile-card{
+cursor:pointer;
+transition:.3s;
+text-align:center;
+}
+​.profile-card:hover{
+transform:scale(1.08);
+}
+​.profile-card img{
+width:140px;
+height:140px;
+border-radius:20px;
+object-fit:cover;
+border:3px solid transparent;
+}
+​.profile-card:hover img{
+border-color:#e50914;
+}
+​.profile-card p{
+margin-top:10px;
+font-weight:600;
+}
+​/* =========================
+NAVBAR
+========================= */
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:999;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 6%;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.9),
+transparent
+);
+}
+​.logo{
+color:#e50914;
+font-size:1.8rem;
+font-weight:800;
+letter-spacing:2px;
+}
+​nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+​nav ul li a{
+color:#ddd;
+font-size:.95rem;
+}
+​nav ul li a:hover{
+color:white;
+}
+​/* =========================
+HERO
+========================= */
+.hero{
+min-height:100vh;
+background-size:cover;
+background-position:center;
+position:relative;
+display:flex;
+align-items:center;
+padding:0 8%;
+}
+​.overlay{
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+to right,
+rgba(0,0,0,.95),
+rgba(0,0,0,.4)
+);
+}
+​.hero-content{
+position:relative;
+z-index:2;
+max-width:650px;
+}
+​.badge{
+display:inline-block;
+background:#e50914;
+padding:6px 12px;
+border-radius:8px;
+font-size:.8rem;
+margin-bottom:15px;
+}
+​.hero-content h1{
+font-size:4rem;
+line-height:1;
+margin-bottom:15px;
+}
+​.hero-content h3{
+color:#d2d2d2;
+margin-bottom:15px;
+}
+​.hero-content p{
+color:#ccc;
+line-height:1.8;
+max-width:520px;
+}
+​.hero-buttons{
+margin-top:25px;
+display:flex;
+gap:15px;
+}
+​.play-btn,
+.info-btn{
+padding:14px 25px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+​.play-btn{
+background:white;
+color:black;
+}
+​.info-btn{
+background:rgba(255,255,255,.2);
+color:white;
+}
+​/* =========================
+GENERAL SECTION
+========================= */
+.section{
+padding:90px 6%;
+position:relative;
+}
+​.section h2{
+font-size:2rem;
+margin-bottom:25px;
+font-weight:700;
+}
+​/* =========================
+CONTINUE WATCHING
+========================= */
+.movie-row{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding-bottom:10px;
+}
+​.movie-row::-webkit-scrollbar{
+height:6px;
+}
+​.movie-row::-webkit-scrollbar-thumb{
+background:#e50914;
+border-radius:20px;
+}
+​.movie-card{
+min-width:250px;
+background:#181818;
+border-radius:15px;
+overflow:hidden;
+transition:.3s;
+cursor:pointer;
+}
+​.movie-card:hover{
+transform:translateY(-8px) scale(1.03);
+}
+​.movie-card img{
+height:320px;
+object-fit:cover;
+}
+​.movie-info{
+padding:15px;
+}
+​.movie-info h3{
+margin-bottom:6px;
+}
+​.movie-info p{
+color:#aaa;
+font-size:.9rem;
+}
+​/* =========================
+TOP PICKS
+========================= */
+.grid-gallery{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(160px,1fr));
+gap:18px;
+}
+​.poster{
+overflow:hidden;
+border-radius:15px;
+cursor:pointer;
+transition:.35s;
+background:#181818;
+}
+​.poster:hover{
+transform:scale(1.05);
+}
+​.poster img{
+height:280px;
+object-fit:cover;
+}
+​/* =========================
+LOVE LETTER
+========================= */
+.letter-box{
+max-width:850px;
+margin:auto;
+background:
+linear-gradient(
+135deg,
+rgba(229,9,20,.15),
+rgba(255,255,255,.03)
+);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+padding:35px;
+line-height:2;
+position:relative;
+}
+​.letter-box h3{
+margin-bottom:20px;
+color:#fff;
+}
+​.letter-box p{
+color:#d6d6d6;
+}
+​/* =========================
+ACHIEVEMENTS
+========================= */
+.achievement-box{
+max-width:700px;
+margin:auto;
+display:grid;
+gap:15px;
+}
+​.achievement{
+background:#181818;
+border-left:4px solid #e50914;
+padding:18px;
+border-radius:12px;
+font-weight:500;
+transition:.3s;
+}
+​.achievement.done{
+background:#1f3623;
+border-left-color:#4ade80;
+}
+​/* =========================
+MEMORY MATCH
+========================= */
+.game-desc{
+text-align:center;
+color:#bcbcbc;
+margin-bottom:25px;
+}
+​.memory-grid{
+max-width:750px;
+margin:auto;
+display:grid;
+grid-template-columns:
+repeat(4,1fr);
+gap:15px;
+}
+​.memory-card{
+aspect-ratio:1/1;
+position:relative;
+cursor:pointer;
+transform-style:preserve-3d;
+transition:.5s;
+}
+​.memory-card.flip{
+transform:rotateY(180deg);
+}
+​.memory-card .front,
+.memory-card .back{
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+backface-visibility:hidden;
+font-size:2rem;
+}
+​.memory-card .front{
+background:#e50914;
+color:white;
+}
+​.memory-card .back{
+background:#1f1f1f;
+transform:rotateY(180deg);
+}
+​#memoryResult{
+margin-top:25px;
+text-align:center;
+font-size:1.1rem;
+font-weight:600;
+color:#4ade80;
+}
+​/* =========================
+SECRET EPISODE
+========================= */
+.secret-lock{
+text-align:center;
+max-width:700px;
+margin:auto;
+}
+​.secret-lock p{
+color:#c9c9c9;
+margin-bottom:20px;
+}
+​#unlockBtn{
+padding:15px 28px;
+border:none;
+border-radius:12px;
+background:#444;
+color:white;
+cursor:not-allowed;
+font-weight:600;
+}
+​#unlockBtn.active{
+background:#e50914;
+cursor:pointer;
+}
+​#secretContent{
+max-width:800px;
+margin:40px auto 0;
+text-align:center;
+}
+​.secret-photo{
+width:100%;
+max-width:350px;
+margin:auto;
+border-radius:18px;
+margin-bottom:25px;
+}
+​#secretContent h3{
+margin-bottom:15px;
+}
+​#secretContent p{
+color:#d1d1d1;
+line-height:1.8;
+}
+​/* =========================
+QUIZ
+========================= */
+.quiz-box{
+max-width:650px;
+margin:auto;
+text-align:center;
+background:#181818;
+padding:35px;
+border-radius:20px;
+}
+​.quiz-box h3{
+margin-bottom:25px;
+}
+​.quiz-box button{
+width:100%;
+margin:10px 0;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#2a2a2a;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+​.quiz-box button:hover{
+background:#e50914;
+}
+​#quizResult{
+margin-top:20px;
+font-weight:600;
+min-height:25px;
+}
+​/* =========================
+HIDDEN HEARTS
+========================= */
+.hidden-heart{
+position:absolute;
+cursor:pointer;
+font-size:1.2rem;
+animation:heartFloat 2.5s infinite;
+z-index:10;
+}
+​.hero .hidden-heart{
+top:25%;
+right:12%;
+}
+​.letter-heart{
+top:20px;
+right:20px;
+}
+​.game-heart{
+top:20px;
+left:20px;
+}
+​@keyframes heartFloat{
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-8px);
+}
+100%{
+transform:translateY(0);
+}
+}
+​/* =========================
+SEASON PROGRESS
+========================= */
+.season-box{
+max-width:700px;
+margin:auto;
+text-align:center;
+}
+​.progress-bar{
+width:100%;
+height:18px;
+background:#222;
+border-radius:999px;
+overflow:hidden;
+margin-bottom:18px;
+}
+​.progress-fill{
+width:0%;
+height:100%;
+background:linear-gradient(
+90deg,
+#e50914,
+#ff3b30
+);
+transition:.5s;
+}
+​#progressText{
+color:#ccc;
+margin-bottom:20px;
+}
+​#seasonBadge{
+background:#181818;
+padding:20px;
+border-radius:16px;
+font-weight:700;
+border:1px solid rgba(255,255,255,.08);
+}
+​.season-heart{
+top:20px;
+right:25px;
+}
+​/* =========================
+ENDING CREDITS
+========================= */
+.credits-section{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+linear-gradient(
+rgba(0,0,0,.92),
+rgba(0,0,0,.98)
+);
+position:relative;
+}
+​.credits-wrapper{
+max-width:700px;
+}
+​.credits-wrapper h1{
+font-size:3rem;
+margin-bottom:15px;
+color:#e50914;
+}
+​.credits-wrapper h2{
+font-size:1.6rem;
+margin-bottom:10px;
+}
+​.credits-wrapper p{
+color:#bcbcbc;
+}
+​.credits-heart{
+bottom:40px;
+right:40px;
+}
+​/* =========================
+FINAL SCREEN
+========================= */
+.final-screen{
+padding:100px 6%;
+}
+​.final-card{
+max-width:700px;
+margin:auto;
+text-align:center;
+background:#181818;
+border-radius:24px;
+padding:40px 30px;
+border:1px solid rgba(255,255,255,.08);
+}
+​.final-card h1{
+margin-bottom:15px;
+}
+​.final-card p{
+color:#c9c9c9;
+line-height:1.8;
+}
+​.renew-btn{
+margin-top:25px;
+padding:15px 28px;
+border:none;
+border-radius:14px;
+background:#e50914;
+color:white;
+cursor:pointer;
+font-weight:700;
+}
+​#renewMessage{
+margin-top:20px;
+color:#4ade80;
+font-weight:600;
+}
+​/* =========================
+ACHIEVEMENT POPUP
+========================= */
+.achievement-popup{
+position:fixed;
+top:20px;
+right:20px;
+background:#1f3623;
+color:white;
+padding:15px 20px;
+border-radius:12px;
+font-weight:600;
+z-index:9999;
+transform:translateX(400px);
+transition:.4s;
+}
+​.achievement-popup.show{
+transform:translateX(0);
+}
+​/* =========================
+SEASON COMPLETED POPUP
+========================= */
+.season-unlocked{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.92);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10000;
+}
+​.unlock-box{
+width:90%;
+max-width:500px;
+background:#181818;
+border-radius:20px;
+text-align:center;
+padding:35px;
+}
+​.unlock-box h1{
+color:#e50914;
+margin-bottom:15px;
+}
+​.unlock-box p{
+color:#cfcfcf;
+line-height:1.8;
+margin-bottom:20px;
+}
+​.unlock-box button{
+padding:14px 25px;
+border:none;
+border-radius:12px;
+background:#e50914;
+color:white;
+cursor:pointer;
+}
+​/* =========================
+CONFETTI
+========================= */
+#confettiContainer{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:9998;
+}
+​.confetti{
+position:absolute;
+top:-20px;
+font-size:18px;
+animation:fallConfetti 4s linear forwards;
+}
+​@keyframes fallConfetti{
+to{
+transform:translateY(110vh) rotate(720deg);
+opacity:0;
+}
+}
+​/* =========================
+FLOATING HEARTS
+========================= */
+.floating-hearts{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+​.floating-hearts span{
+position:absolute;
+bottom:-50px;
+animation:riseHeart 12s linear infinite;
+font-size:20px;
+opacity:.4;
+}
+​.floating-hearts span:nth-child(1){
+left:10%;
+animation-delay:0s;
+}
+​.floating-hearts span:nth-child(2){
+left:30%;
+animation-delay:2s;
+}
+​.floating-hearts span:nth-child(3){
+left:50%;
+animation-delay:4s;
+}
+​.floating-hearts span:nth-child(4){
+left:70%;
+animation-delay:6s;
+}
+​.floating-hearts span:nth-child(5){
+left:90%;
+animation-delay:8s;
+}
+​@keyframes riseHeart{
+from{
+transform:translateY(0);
+opacity:.5;
+}
+​to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+​/* =========================
+FOOTER
+========================= */
+footer{
+text-align:center;
+padding:30px;
+color:#8a8a8a;
+border-top:1px solid rgba(255,255,255,.06);
+}
+​/* =========================
+MOBILE RESPONSIVE
+========================= */
+@media(max-width:768px){
+nav{
+padding:15px 5%;
+}
+​nav ul{
+gap:12px;
+}
+​nav ul li a{
+font-size:.8rem;
+}
+​.hero{
+padding:0 6%;
+}
+​.hero-content h1{
+font-size:2.4rem;
+}
+​.hero-content h3{
+font-size:1rem;
+}
+​.hero-content p{
+font-size:.92rem;
+}
+​.hero-buttons{
+flex-direction:column;
+}
+​.memory-grid{
+grid-template-columns:
+repeat(3,1fr);
+}
+​.section{
+padding:70px 5%;
+}
+​.poster img{
+height:220px;
+}
+​.movie-card{
+min-width:200px;
+}
+​.movie-card img{
+height:260px;
+}
+​.credits-wrapper h1{
+font-size:2.2rem;
+}
+​.credits-wrapper h2{
+font-size:1.2rem;
+}
+}
+​@media(max-width:480px){
+.memory-grid{
+grid-template-columns:
+repeat(2,1fr);
+}
+​.hero-content h1{
+font-size:2rem;
+}
+​.logo{
+font-size:1.4rem;
+}
+​.section h2{
+font-size:1.5rem;
+}
+}
+</style>
+</head>
+​<body>
+​<!-- ========================= -->
+<!-- AUDIO -->
+<!-- ========================= -->
+<audio id="bgMusic" loop>
+<source src="yourestilltheone.mp3" type="audio/mpeg">
+</audio>
+​<!-- ========================= -->
+<!-- LOADING SCREEN -->
+<!-- ========================= -->
+<div id="loadingScreen">
+<div class="netflix-logo">
+LOVEFLIX
+</div>
+<p>
+Loading Our Story...
+</p>
+</div>
+​<!-- ========================= -->
+<!-- PIN SCREEN -->
+<!-- ========================= -->
+<div id="pinScreen" class="hidden">
+<div class="pin-box">
+<h2>
+Our Story 🔐
+</h2>
+<p>
+Enter Access Code
+</p>
+<input type="password" id="pinInput" maxlength="4" placeholder="••••">
+<button onclick="checkPin()">
+Continue ❤️
+</button>
+<span id="pinError"></span>
+</div>
+</div>
+​<!-- ========================= -->
+<!-- PROFILE SELECTION -->
+<!-- ========================= -->
+<div id="profileScreen" class="hidden">
+<h1>
+Who's Watching?
+</h1>
+<div class="profiles">
+<div class="profile-card" onclick="enterLoveflix()">
+<img src="foto1.jpg" alt="Darrel">
+<p>
+Darrel ❤️
+</p>
+</div>
+</div>
+</div>
+​<!-- ========================= -->
+<!-- MAIN APP -->
+<!-- ========================= -->
+<div id="mainApp" class="hidden">
+​<!-- ========================= -->
+<!-- NAVBAR -->
+<!-- ========================= -->
+<nav>
+<div class="logo">
+LOVEFLIX
+</div>
+<ul>
+<li>
+<a href="#hero">
+Home
+</a>
+</li>
+<li>
+<a href="#continue">
+Memories
+</a>
+</li>
+<li>
+<a href="#letter">
+Our Letter
+</a>
+</li>
+<li>
+<a href="#quiz">
+Quiz
+</a>
+</li>
+</ul>
+</nav>
+​<!-- ========================= -->
+<!-- HERO SECTION -->
+<!-- ========================= -->
+<section id="hero" class="hero" style="background-image:url('foto1.jpg');">
+<div class="overlay"></div>
+​<div class="hero-content">
+<span class="badge">
+2ND MENSIVERSARY
+</span>
+​<h1>
+HAPPY 2ND MENSIVERSARY, DARREL ❤️
+</h1>
+​<h3>
+Our Story • Episode 01
+</h3>
+​<p>
+Two months, countless memories, and one person I still choose every day.
+</p>
+​<div class="hero-buttons">
+<button class="play-btn" onclick="playStory()">
+▶ Play Our Story
+</button>
+​<button class="info-btn" onclick="scrollToSection('continue')">
+More Memories
+</button>
+</div>
+</div>
+​<!-- Hidden Heart #1 -->
+<div class="hidden-heart" onclick="collectHeart(this)">
+❤️
+</div>
+</section>
+​<!-- ========================= -->
+<!-- CONTINUE WATCHING -->
+<!-- ========================= -->
+<section id="continue" class="section">
+<h2>
+Continue Watching 💗
+</h2>
+​<div class="movie-row">
+<div class="movie-card">
+<img src="foto2.jpg" alt="Memory 01">
+<div class="movie-info">
+<h3>
+My Favorite Person
+</h3>
+<p>
+Episode 01
+</p>
+</div>
+</div>
+​<div class="movie-card">
+<img src="foto3.jpg" alt="Memory 02">
+<div class="movie-info">
+<h3>
+The Boy I Love
+</h3>
+<p>
+Episode 02
+</p>
+</div>
+</div>
+​<div class="movie-card">
+<img src="foto4.jpg" alt="Memory 03">
+<div class="movie-info">
+<h3>
+My Safe Place
+</h3>
+<p>
+Episode 03
+</p>
+</div>
+</div>
+​<div class="movie-card">
+<img src="foto5.jpg" alt="Memory 04">
+<div class="movie-info">
+<h3>
+Us, Always
+</h3>
+<p>
+Episode 04
+</p>
+</div>
+</div>
+</div>
+</section>
+​<!-- ========================= -->
+<!-- PHOTO GALLERY (TOP PICKS) -->
+<!-- ========================= -->
+<section class="section">
+<h2>
+Top Picks For My Favorite Person 😻
+</h2>
+​<div class="grid-gallery">
+<div class="poster">
+<img src="foto6.jpg" alt="Memory 05">
+</div>
+<div class="poster">
+<img src="foto7.jpg" alt="Memory 06">
+</div>
+<div class="poster">
+<img src="foto8.jpg" alt="Memory 07">
+</div>
+<div class="poster">
+<img src="foto9.jpg" alt="Memory 08">
+</div>
+<div class="poster">
+<img src="foto10.jpg" alt="Memory 09">
+</div>
+<div class="poster">
+<img src="foto11.jpg" alt="Memory 10">
+</div>
+<div class="poster">
+<img src="foto12.jpg" alt="Memory 11">
+</div>
+<div class="poster">
+<img src="foto13.jpg" alt="Memory 12">
+</div>
+<div class="poster">
+<img src="foto14.jpg" alt="Memory 13">
+</div>
+<div class="poster">
+<img src="foto15.jpg" alt="Memory 14">
+</div>
+</div>
+</section>
+​<!-- ========================= -->
+<!-- LOVE LETTER -->
+<!-- ========================= -->
+<section id="letter" class="section">
+<h2>
+Exclusive Mensiversary Episode 💌
+</h2>
+​<div class="letter-box">
+<h3>
+Episode 01: I'm Glad It's You ❤️
+</h3>
+​<p>
+sayang, gua seneng banget bisa sampai di titik ini sama lu, el. thank you for being part of my life, for making me smile in your own little ways, and for choosing me.
+
+
+
+gua emang nggak jago ngerangkai kata romantis, gengsi gua aja udah setinggi burj khalifa WKWKWK, tapi rasa sayang gua ke lu melebihi itu. makanya gua lebih sering nunjukin rasa sayang gua lewat hal-hal kecil, kayak chibi yang gua bikin buat lu, manips yg gua bikin, channel yg gua bikin.
+
+
+
+gua harap kita bisa terus belajar buat ngerti satu sama lain, tumbuh bareng, dan sama-sama memperbaiki apa pun yang perlu diperbaiki. i don't need us to be perfect, i just want us to keep trying and choosing each other.
+
+
+
+gua sayang banget sama lu, el, walaupun lu kadang ngeselin dan bikin gua pengen nonjok BUT STILL, i'm really glad it's you. semoga cerita kita masih panjang ya el.
+
+
+
+i love you, my favorite headache. 👻🤍
+</p>
+</div>
+​<!-- Hidden Heart #2 -->
+<div class="hidden-heart letter-heart" onclick="collectHeart(this)">
+❤️
+</div>
+</section>
+​<!-- ========================= -->
+<!-- ACHIEVEMENT SYSTEM -->
+<!-- ========================= -->
+<section class="section">
+<h2>
+Our Little Achievements 🏆
+</h2>
+​<div class="achievement-box">
+<div class="achievement" id="ach1">
+⬜ First Login
+</div>
+<div class="achievement" id="ach2">
+⬜ Read Our Letter
+</div>
+<div class="achievement" id="ach3">
+⬜ Couple Quiz Master
+</div>
+<div class="achievement" id="ach4">
+⬜ Memory Hunter
+</div>
+<div class="achievement" id="ach5">
+⬜ Hidden Heart Finder
+</div>
+<div class="achievement" id="ach6">
+⬜ Secret Episode
+</div>
+</div>
+</section>
+​<!-- ========================= -->
+<!-- MEMORY MATCH GAME -->
+<!-- ========================= -->
+<section id="memoryGame" class="section">
+<h2>
+Our Memory Match 💞
+</h2>
+​<p class="game-desc">
+Match all the memories to unlock something special.
+</p>
+​<div class="memory-grid">
+<div class="memory-card" data-card="1">
+<div class="front">?</div>
+<div class="back">❤️</div>
+</div>
+​<div class="memory-card" data-card="1">
+<div class="front">?</div>
+<div class="back">❤️</div>
+</div>
+​<div class="memory-card" data-card="2">
+<div class="front">?</div>
+<div class="back">🫰</div>
+</div>
+​<div class="memory-card" data-card="2">
+<div class="front">?</div>
+<div class="back">🫰</div>
+</div>
+​<div class="memory-card" data-card="3">
+<div class="front">?</div>
+<div class="back">🥰</div>
+</div>
+​<div class="memory-card" data-card="3">
+<div class="front">?</div>
+<div class="back">🥰</div>
+</div>
+</div>
+​<div id="memoryResult"></div>
+​<!-- Hidden Heart #3 -->
+<div class="hidden-heart game-heart" onclick="collectHeart(this)">
+❤️
+</div>
+</section>
+​<!-- ========================= -->
+<!-- SECRET EPISODE -->
+<!-- ========================= -->
+<section class="section" id="secretEpisode">
+<h2>
+Secret Episode 🔐
+</h2>
+​<div class="secret-lock">
+<p>
+Collect all hidden hearts to unlock this little secret.
+</p>
+​<button id="unlockBtn" disabled>
+Locked 🔒
+</button>
+</div>
+​<div id="secretContent" class="hidden">
+<img src="foto15.jpg" class="secret-photo" alt="Our Secret Memory">
+​<h3>
+A Little Secret About You 🫰
+</h3>
+​<p>
+Mau tau ga fakta menarik?
+ya itu faktanya kamu menarik🫰
+
+
+
+kamu itu kayak bagian kecil dari hari aku yang ternyata punya arti besar banget el.
+kadang cuma ngobrol sebentar sama kamu aja udah cukup buat bikin aku seneng
+
+
+
+dan kalau boleh egois sedikit, aku masih pengen jadi orang yang bisa bilang “aku sayang kamu” ke kamu berkali-kali, setiap hari, sampai kamu bosen dengernya.
+
+
+
+i love you more than you know, sayanggg❤️
+</p>
+</div>
+</section>
+​<!-- ========================= -->
+<!-- QUIZ SECTION -->
+<!-- ========================= -->
+<section id="quiz" class="section">
+<h2>
+Darrel Quiz 💗
+</h2>
+​<div class="quiz-box">
+<h3>
+Siapa yang paling aku sayang?
+</h3>
+​<button onclick="correctAnswer()">
+Darrel ❤️
+</button>
+​<button onclick="wrongAnswer()">
+Orang Lain
+</button>
+​<button onclick="wrongAnswer()">
+Kucing Tetangga 😭
+</button>
+​<div id="quizResult"></div>
+</div>
+</section>
+​<!-- ========================= -->
+<!-- SEASON COMPLETION -->
+<!-- ========================= -->
+<section id="seasonComplete" class="section">
+<h2>
+Our Story Progress
+</h2>
+​<div class="season-box">
+<div class="progress-bar">
+<div id="seasonProgress" class="progress-fill"></div>
+</div>
+​<p id="progressText">
+0 / 6 Achievements Completed
+</p>
+​<div id="seasonBadge">
+💗 Our Story Loading...
+</div>
+</div>
+​<!-- Hidden Heart #4 -->
+<div class="hidden-heart season-heart" onclick="collectHeart(this)">
+❤️
+</div>
+</section>
+​<!-- ========================= -->
+<!-- ENDING CREDITS -->
+<!-- ========================= -->
+<section id="credits" class="credits-section">
+<div class="credits-wrapper">
+<h1>
+LOVEFLIX
+</h1>
+​<p>
+A 2nd Mensiversary Special
+</p>
+
+
+​<p>
+From
+</p>
+<h2>
+Teicy ❤️
+</h2>
+
+
+​<p>
+Starring
+</p>
+<h2>
+Darrel ❤️
+</h2>
+
+
+​<p>
+Season
+</p>
+<h2>
+02
+</h2>
+
+
+​<p>
+Release Date
+</p>
+<h2>
+05
+</h2>
+
+
+​<p>
+Genre
+</p>
+<h2>
+Romance • Comedy • Forever
+</h2>
+
+
+
+​<h1>
+Thank You For Watching
+</h1>
+<h2>
+Our Story ❤️
+</h2>
+</div>
+​<!-- Hidden Heart #5 -->
+<div class="hidden-heart credits-heart" onclick="collectHeart(this)">
+❤️
+</div>
+</section>
+​<!-- ========================= -->
+<!-- FINAL SCREEN -->
+<!-- ========================= -->
+<section class="final-screen">
+<div class="final-card">
+<h1>
+🎬 Ready For Another Episode?
+</h1>
+​<p>
+This story isn't over yet.
+There are still so many memories,
+laughs, random conversations,
+and moments waiting for us.
+</p>
+​<button onclick="renewSeason()" class="renew-btn">
+YES ❤️
+</button>
+​<div id="renewMessage"></div>
+</div>
+</section>
+​</div>
+<!-- END MAIN APP -->
+​<!-- ========================= -->
+<!-- CONFETTI -->
+<!-- ========================= -->
+<div id="confettiContainer"></div>
+​<!-- ========================= -->
+<!-- FLOATING HEARTS -->
+<!-- ========================= -->
+<div class="floating-hearts">
+<span>❤️</span>
+<span>🫰</span>
+<span>❤️</span>
+<span>💗</span>
+<span>🥰</span>
+</div>
+​<!-- ========================= -->
+<!-- POPUP ACHIEVEMENT -->
+<!-- ========================= -->
+<div id="achievementPopup" class="achievement-popup">
+🏆 Achievement Unlocked!
+</div>
+​<!-- ========================= -->
+<!-- SUCCESS SCREEN -->
+<!-- ========================= -->
+<div id="seasonUnlocked" class="season-unlocked hidden">
+<div class="unlock-box">
+<h1>
+💗 OUR STORY COMPLETED
+</h1>
+​<p>
+You found all the little pieces hidden inside this story.
+
+
+
+But don't worry...
+
+
+
+Our story is still going.
+</p>
+​<h3>
+Happy 2nd Mensiversary, Darrel ❤️
+</h3>
+​<button onclick="closeSeasonUnlocked()">
+Continue
+</button>
+</div>
+</div>
+​<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+<footer>
+<p>
+Made with ❤️ by Teicy
+</p>
+</footer>
+​<!-- ========================= -->
+<!-- SCRIPT -->
+<!-- ========================= -->
+<script>
+/* =========================
+LOVEFLIX — 2ND MENSIVERSARY
+TEICY ❤️ DARREL
+========================= */
+​const CORRECT_PIN = "0506";
+​let heartsCollected = 0;
+const totalHearts = 5;
+​let achievements = {
+login: false,
+letter: false,
+quiz: false,
+memory: false,
+hearts: false,
+secret: false
+};
+​let completedAchievements = 0;
+​let matchedPairs = 0;
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let memoryCompleted = false;
+let secretOpened = false;
+​/* =========================
+LOADING SCREEN
+========================= */
+window.addEventListener("load", () => {
+setTimeout(() => {
+const loadingScreen = document.getElementById("loadingScreen");
+const pinScreen = document.getElementById("pinScreen");
+​if (loadingScreen) {
+loadingScreen.classList.add("hidden");
+}
+​if (pinScreen) {
+pinScreen.classList.remove("hidden");
+}
+}, 2000);
+});
+​/* =========================
+PIN LOGIN
+========================= */
+function checkPin() {
+const pinInput = document.getElementById("pinInput");
+const error = document.getElementById("pinError");
+const pinScreen = document.getElementById("pinScreen");
+const profileScreen = document.getElementById("profileScreen");
+​if (!pinInput || !error) return;
+​if (pinInput.value === CORRECT_PIN) {
+if (pinScreen) {
+pinScreen.classList.add("hidden");
+}
+​if (profileScreen) {
+profileScreen.classList.remove("hidden");
+}
+​error.textContent = "";
+​unlockAchievement("login", "First Login ❤️");
+} else {
+error.textContent = "PIN-nya salah, sayang 😭 Coba lagi yaa!";
+pinInput.value = "";
+pinInput.focus();
+}
+}
+​/* =========================
+ENTER LOVEFLIX
+========================= */
+function enterLoveflix() {
+const profileScreen = document.getElementById("profileScreen");
+const mainApp = document.getElementById("mainApp");
+​if (profileScreen) {
+profileScreen.classList.add("hidden");
+}
+​if (mainApp) {
+mainApp.classList.remove("hidden");
+}
+​const music = document.getElementById("bgMusic");
+​if (music) {
+music.volume = 0.7;
+music.play().catch(() => {
+// Musik bisa dimulai lewat tombol Play.
+});
+}
+​window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+}
+​/* =========================
+PLAY OUR STORY
+========================= */
+function playStory() {
+const music = document.getElementById("bgMusic");
+​if (music) {
+music.play().catch(() => {});
+}
+​createConfetti();
+scrollToSection("continue");
+}
+​/* =========================
+SCROLL HELPER
+========================= */
+function scrollToSection(id) {
+const section = document.getElementById(id);
+if (!section) return;
+​section.scrollIntoView({
+behavior: "smooth",
+block: "start"
+});
+}
+​/* =========================
+ACHIEVEMENT SYSTEM
+========================= */
+function unlockAchievement(key, title) {
+if (!Object.prototype.hasOwnProperty.call(achievements, key)) {
+return;
+}
+​if (achievements[key]) return;
+​achievements[key] = true;
+completedAchievements++;
+​showAchievementPopup(title);
+updateAchievementUI();
+updateProgress();
+}
+​/* =========================
+ACHIEVEMENT UI
+========================= */
+function updateAchievementUI() {
+const achievementData = {
+login: { id: "ach1", text: "✅ First Login" },
+letter: { id: "ach2", text: "✅ Read Our Letter" },
+quiz: { id: "ach3", text: "✅ Couple Quiz Master" },
+memory: { id: "ach4", text: "✅ Memory Hunter" },
+hearts: { id: "ach5", text: "✅ Hidden Heart Finder" },
+secret: { id: "ach6", text: "✅ Secret Episode" }
+};
+​Object.keys(achievementData).forEach(key => {
+const item = achievementData[key];
+const element = document.getElementById(item.id);
+​if (!element) return;
+​if (achievements[key]) {
+element.classList.add("done");
+element.textContent = item.text;
+}
+});
+}
+​/* =========================
+ACHIEVEMENT POPUP
+========================= */
+function showAchievementPopup(title) {
+const popup = document.getElementById("achievementPopup");
+if (!popup) return;
+​popup.textContent = "🏆 Achievement Unlocked! " + title;
+popup.classList.remove("show");
+​void popup.offsetWidth;
+​popup.classList.add("show");
+​setTimeout(() => {
+popup.classList.remove("show");
+}, 2500);
+}
+​/* =========================
+PROGRESS BAR
+========================= */
+function updateProgress() {
+const progress = document.getElementById("seasonProgress");
+const progressText = document.getElementById("progressText");
+const seasonBadge = document.getElementById("seasonBadge");
+​const percent = (completedAchievements / 6) * 100;
+​if (progress) {
+progress.style.width = percent + "%";
+}
+​if (progressText) {
+progressText.textContent = completedAchievements + " / 6 Achievements Completed";
+}
+​if (seasonBadge) {
+if (completedAchievements >= 6) {
+seasonBadge.textContent = "🏆 Our Story Completed ❤️";
+} else {
+seasonBadge.textContent = "💗 " + completedAchievements + " of 6 Memories Unlocked";
+}
+}
+​if (
+completedAchievements >= 6 &&
+!document.getElementById("seasonUnlocked")?.classList.contains("hidden")
+) {
+return;
+}
+​if (completedAchievements >= 6) {
+setTimeout(() => {
+const popup = document.getElementById("seasonUnlocked");
+if (popup) {
+popup.classList.remove("hidden");
+}
+}, 800);
+}
+}
+​/* =========================
+LETTER DETECTION
+========================= */
+function checkLetterRead() {
+const letter = document.getElementById("letter");
+if (!letter) return;
+​const rect = letter.getBoundingClientRect();
+const visible = rect.top < window.innerHeight * 0.75 && rect.bottom > 100;
+​if (visible) {
+unlockAchievement("letter", "💌 Read Our Letter");
+}
+}
+​window.addEventListener("scroll", checkLetterRead, { passive: true });
+​/* =========================
+HIDDEN HEARTS
+========================= */
+function collectHeart(element) {
+if (!element) return;
+​if (element.classList.contains("found")) {
+return;
+}
+​element.classList.add("found");
+element.style.opacity = "0.3";
+element.style.pointerEvents = "none";
+​heartsCollected++;
+createConfetti();
+​if (heartsCollected >= totalHearts) {
+unlockAchievement("hearts", "❤️ Hidden Heart Finder");
+​const unlockBtn = document.getElementById("unlockBtn");
+if (unlockBtn) {
+unlockBtn.disabled = false;
+unlockBtn.classList.add("active");
+unlockBtn.textContent = "Unlock Secret Episode 💌";
+}
+}
+}
+​/* =========================
+SECRET EPISODE
+========================= */
+function openSecretEpisode() {
+if (heartsCollected < totalHearts) {
+return;
+}
+​const secretContent = document.getElementById("secretContent");
+if (!secretContent) return;
+​secretContent.classList.remove("hidden");
+​if (!secretOpened) {
+secretOpened = true;
+unlockAchievement("secret", "🎁 Secret Episode Unlocked");
+createConfetti();
+}
+​scrollToSection("secretEpisode");
+}
+​document.addEventListener("DOMContentLoaded", () => {
+const unlockBtn = document.getElementById("unlockBtn");
+if (!unlockBtn) return;
+​unlockBtn.addEventListener("click", openSecretEpisode);
+});
+​/* =========================
+QUIZ SYSTEM
+========================= */
+function correctAnswer() {
+const result = document.getElementById("quizResult");
+if (!result) return;
+​result.textContent = "IHH BENER BANGETT! DARREL TERUSSS ❤️🫰";
+result.style.color = "#4ade80";
+​unlockAchievement("quiz", "💗 Couple Quiz Master");
+createConfetti();
+}
+​function wrongAnswer() {
+const result = document.getElementById("quizResult");
+if (!result) return;
+​result.textContent = "SALAHH 😭 Coba pikirin lagi, siapa hayoo?";
+result.style.color = "#ff4d4d";
+}
+​/* =========================
+CONFETTI EFFECT
+========================= */
+function createConfetti() {
+const container = document.getElementById("confettiContainer");
+if (!container) return;
+​const icons = ["❤️", "💗", "💖", "🫰", "🥰", "✨", "💕", "💌"];
+​for (let i = 0; i < 25; i++) {
+const confetti = document.createElement("span");
+confetti.classList.add("confetti");
+confetti.textContent = icons[Math.floor(Math.random() * icons.length)];
+confetti.style.left = Math.random() * 100 + "%";
+confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+confetti.style.animationDelay = Math.random() * 0.5 + "s";
+​container.appendChild(confetti);
+​setTimeout(() => {
+confetti.remove();
+}, 4500);
+}
+}
+​/* =========================
+NEXT CHAPTER
+========================= */
+function renewSeason() {
+const renewMessage = document.getElementById("renewMessage");
+if (!renewMessage) return;
+​renewMessage.textContent = "YEAYYY! More memories with you, Darrel. I love youuu! ❤️🫰";
+createConfetti();
+}
+​/* =========================
+CLOSE COMPLETION POPUP
+========================= */
+function closeSeasonUnlocked() {
+const popup = document.getElementById("seasonUnlocked");
+if (!popup) return;
+​popup.classList.add("hidden");
+}
+​/* =========================
+MEMORY MATCH GAME
+========================= */
+function resetMemoryBoard() {
+firstCard = null;
+secondCard = null;
+lockBoard = false;
+}
+​function flipCard() {
+if (lockBoard || memoryCompleted) return;
+if (this === firstCard) return;
+if (this.classList.contains("matched")) return;
+​this.classList.add("flip");
+​if (!firstCard) {
+firstCard = this;
+return;
+}
+​secondCard = this;
+checkMemoryMatch();
+}
+​function checkMemoryMatch() {
+const isMatch = firstCard.dataset.card === secondCard.dataset.card;
+​if (isMatch) {
+firstCard.classList.add("matched");
+secondCard.classList.add("matched");
+​firstCard.removeEventListener("click", flipCard);
+secondCard.removeEventListener("click", flipCard);
+​matchedPairs++;
+resetMemoryBoard();
+​const cards = document.querySelectorAll(".memory-card");
+const uniqueTypes = new Set(Array.from(cards).map(card => card.dataset.card));
+​if (matchedPairs >= uniqueTypes.size) {
+memoryCompleted = true;
+const result = document.getElementById("memoryResult");
+​if (result) {
+result.textContent = "YEAYYY! You matched all our little memories! ❤️🎉";
+}
+​unlockAchievement("memory", "🧩 Memory Hunter");
+createConfetti();
+}
+} else {
+lockBoard = true;
+​setTimeout(() => {
+if (firstCard) {
+firstCard.classList.remove("flip");
+}
+if (secondCard) {
+secondCard.classList.remove("flip");
+}
+resetMemoryBoard();
+}, 900);
+}
+}
+​/* =========================
+SHUFFLE MEMORY CARDS
+========================= */
+function shuffleMemoryCards() {
+const grid = document.querySelector(".memory-grid");
+if (!grid) return;
+​const cards = Array.from(grid.querySelectorAll(".memory-card"));
+​cards.forEach(card => {
+card.style.order = Math.floor(Math.random() * cards.length);
+card.addEventListener("click", flipCard);
+});
+}
+​/* =========================
+ENTRANCE ANIMATION
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+const sections = document.querySelectorAll(".section");
+​if (!("IntersectionObserver" in window)) {
+sections.forEach(section => {
+section.style.opacity = "1";
+section.style.transform = "translateY(0)";
+});
+return;
+}
+​const observer = new IntersectionObserver(
+entries => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.opacity = "1";
+entry.target.style.transform = "translateY(0)";
+observer.unobserve(entry.target);
+}
+});
+},
+{ threshold: 0.08 }
+);
+​sections.forEach(section => {
+section.style.opacity = "0";
+section.style.transform = "translateY(35px)";
+section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+observer.observe(section);
+});
+});
+​/* =========================
+HERO TITLE ANIMATION
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+const heroTitle = document.querySelector(".hero-content h1");
+if (!heroTitle) return;
+​heroTitle.style.transition = "transform 0.6s ease";
+​setInterval(() => {
+heroTitle.style.transform = "translateY(-3px)";
+setTimeout(() => {
+heroTitle.style.transform = "translateY(0)";
+}, 600);
+}, 2500);
+});
+​/* =========================
+ENTER KEY FOR PIN
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+const pinInput = document.getElementById("pinInput");
+if (!pinInput) return;
+​pinInput.addEventListener("keydown", event => {
+if (event.key === "Enter") {
+checkPin();
+}
+});
+});
+​/* =========================
+INITIALIZATION
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+updateAchievementUI();
+updateProgress();
+shuffleMemoryCards();
+});
+​/* =========================
+INITIAL CONFETTI
+========================= */
+window.addEventListener("load", () => {
+setTimeout(() => {
+createConfetti();
+}, 3500);
+});
+</script>
+​</body>
+  </html>
